@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GopUslugi</title>
+	    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc; /* Light grayish blue background */
+            color: #334155; /* Dark grey text */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #1e293b; /* Dark blue/black */
+            font-size: 24px;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 32px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 16px;
+            padding-left: 24px; /* Space for the bullet */
+            position: relative;
+        }
+
+        /* Custom blue dot bullet */
+        li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            background-color: #3b82f6; /* Bright blue */
+            border-radius: 50%;
+        }
+
+        h2 {
+            color: #1e293b;
+            font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 0;
+            color: #475569; /* Slightly lighter gray */
+            font-size: 16px;
+        }
+
+        a {
+            color: #2563eb; /* Link blue */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .warning-box {
+            background-color: #fff7ed; /* Light yellow/beige */
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+            color: #9a3412; /* Dark brown/red text for warnings */
+        }
+
+        .warning-box h2 {
+            color: #c2410c; /* Slightly darker header color */
+            font-size: 18px;
+        }
+
+        .btn {
+			border: none;
+            display: block;
+            width: fit-content;
+            margin: 60px auto 0;
+            background-color: #2563eb;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+  </head>
+  <body>
+
+
+<div class="container">
+    <h1>Для подачи заявления вам потребуется</h1>
+
+    <div class="info-card">
+        <ul>
+            <li>Концентрация</li>
+            <li>Терпение</li>
+            <li>Реакция</li>
+        </ul>
+    </div>
+
+    <h2>Результат</h2>
+    <p>Неочевиден</p>
+
+<button type="button" class="btn" id="myElementId">Отправить заявление</button>
+
+</div>
+
+  </body>
+  	<script>
+	function centerElement(elementId) {
+
+	  var element = document.getElementById(elementId);
+	  // Ensure the element is positioned
+	  element.style.position = 'absolute'; // or 'fixed'
+
+	  // Calculate top and left positions
+	  var topPosition = (window.innerHeight / 2) - (element.offsetHeight / 2);
+	  var leftPosition = (window.innerWidth / 2) - (element.offsetWidth / 2);
+
+	  // Apply positions with 'px' units
+	  element.style.top = topPosition + 'px';
+	  element.style.left = leftPosition + 'px';
+	}
+	
+
+	window.addEventListener("mousemove", function(e) {
+	  var x = e.clientX;
+	  var y = e.clientY;
+	  
+	  var myEl = document.getElementById("myElementId");
+	  
+	  let l = window.scrollX + myEl.getBoundingClientRect().left
+	  let t = window.scrollY + myEl.getBoundingClientRect().top
+	  let r = window.scrollX + myEl.getBoundingClientRect().right
+	  let b = window.scrollY + myEl.getBoundingClientRect().bottom
+
+		let d = 46;
+		let shift  = 60;
+
+	  //console.log(`X: ${x}, Y: ${y}`);
+	  if (x > l - d && x < l && y > t && y < b) {
+			myEl.style.left = (l + shift) + "px";
+	  }
+	  
+	  if (x > r && x < r + d && y > t && y < b) {
+			myEl.style.left = (l - shift) + "px";
+	  }	  
+	  
+	  if (x > l && x < r && y > t - d && y < b) {
+			myEl.style.top = (t + shift/2) + "px";		
+	  }
+	  
+	  if (x > l && x < r && y > t && y < b + d) {	
+			myEl.style.top = (t - shift*2) + "px";		
+	  }	  
+    });
+	  
+	window.onload = function() {
+	centerElement('myElementId');
+};
+
+window.onresize = function() {
+    centerElement('myElementId');
+};
+	</script>
+</html>
